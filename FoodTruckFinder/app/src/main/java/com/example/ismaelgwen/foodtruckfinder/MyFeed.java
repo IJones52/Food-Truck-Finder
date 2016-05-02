@@ -75,13 +75,12 @@ public class MyFeed extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+
             // Handle the camera action
-        } else if (id == R.id.myFeed) {
+        if(id == R.id.myFeed) {
 
         } else if (id == R.id.map) {
-            MapFragment m = new MapFragment();
-            Intent i = new Intent();
+        setContentView(R.layout.fragment_map);
 
 
         } else if (id == R.id.allTrucks) {
