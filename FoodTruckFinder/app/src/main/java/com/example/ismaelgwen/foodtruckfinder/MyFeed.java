@@ -80,8 +80,8 @@ public class MyFeed extends AppCompatActivity
         if(id == R.id.myFeed) {
 
         } else if (id == R.id.map) {
-        setContentView(R.layout.fragment_map);
-
+        Intent i = new Intent(this, MapActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.allTrucks) {
 

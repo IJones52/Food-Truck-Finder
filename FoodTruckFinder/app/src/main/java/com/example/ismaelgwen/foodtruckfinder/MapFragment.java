@@ -28,7 +28,7 @@ public class MapFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    MapView mapView = (MapView) getView().findViewById(R.id.mapView);
+    MapView mapView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,9 +68,10 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        final View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-
-        return inflater.inflate(R.layout.fragment_map, container, false);
+        mapView = (MapView) view.findViewById(R.id.mapView);
+        return view;
 
     }
 
