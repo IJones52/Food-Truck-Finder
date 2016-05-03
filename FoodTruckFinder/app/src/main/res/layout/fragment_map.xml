@@ -10,6 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         mapbox:access_token="pk.eyJ1IjoiaWpvbmVzIiwiYSI6ImNpbW00Znp5MTAzczdlOW02N3c2NjYxdXgifQ.LZZvzTQqEXrAxN6bIf9ERw"
+        mapbox:center_latitude="47.6062"
+        mapbox:center_longitude="122.3321"
+        mapbox:zoom="12"
         android:id="@+id/mapView">
 
     </com.mapbox.mapboxsdk.maps.MapView>
