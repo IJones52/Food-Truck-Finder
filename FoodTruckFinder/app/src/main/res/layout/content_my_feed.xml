@@ -13,5 +13,10 @@
     tools:showIn="@layout/app_bar_my_feed"
     tools:context="com.example.ismaelgwen.foodtruckfinder.MyFeed">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Insert Twitter Feed Here"/>
+
 
 </RelativeLayout>

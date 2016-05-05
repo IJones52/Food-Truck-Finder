@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 
 /**
@@ -72,6 +76,24 @@ public class MapFragment extends Fragment  {
 
         mapView = (MapView) view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                mapboxMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(47.6908946, -122.3657819))
+                    .title("Chuck's Hop Shop"));
+                mapboxMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(47.6666891, -122.3711647))
+                        .title("Stoup Brewing"));
+                mapboxMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(47.6638753, -122.377054))
+                        .title("Peddler Brewing"));
+                mapboxMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(47.6645364, -122.3702458))
+                        .title("Populuxe  Brewing"));
+
+            }
+        });
         return view;
 
     }
