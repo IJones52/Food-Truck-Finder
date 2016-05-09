@@ -84,7 +84,8 @@ public class MyFeed extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.allTrucks) {
-
+        Intent i = new Intent(this, AllTrucks.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
