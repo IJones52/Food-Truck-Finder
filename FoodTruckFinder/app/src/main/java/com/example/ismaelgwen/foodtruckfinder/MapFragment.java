@@ -1,18 +1,37 @@
 package com.example.ismaelgwen.foodtruckfinder;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.annotations.PolylineOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -79,7 +98,7 @@ public class MapFragment extends Fragment  {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
-                mapboxMap.addMarker(new MarkerOptions()
+           /*     mapboxMap.addMarker(new MarkerOptions()
                     .position(new LatLng(47.6908946, -122.3657819))
                     .title("Chuck's Hop Shop"));
                 mapboxMap.addMarker(new MarkerOptions()
@@ -90,8 +109,7 @@ public class MapFragment extends Fragment  {
                         .title("Peddler Brewing"));
                 mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(47.6645364, -122.3702458))
-                        .title("Populuxe  Brewing"));
-
+*/
             }
         });
         return view;
@@ -166,4 +184,86 @@ public class MapFragment extends Fragment  {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
-}
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
+    }
+
+    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+            JSONObject json = new JSONObject(jsonText);
+            return json;
+        } finally {
+            is.close();
+        }
+    }
+
+class ReadCoordinatesFromURLTask extends AsyncTask<Void, Void, List<LatLng>> {
+    @Override
+
+    protected List<LatLng> doInBackground(Void... voids) {
+
+        ArrayList<LatLng> points = new ArrayList<>();
+
+        try {
+
+            // Parse JSON
+            JSONObject json =  MapFragment.readJsonFromUrl("placeholder");
+            JSONArray features = json.getJSONArray("features");
+            JSONObject feature = features.getJSONObject(0);
+            JSONObject geometry = feature.getJSONObject("geometry");
+            if (geometry != null) {
+                String type = geometry.getString("type");
+
+
+                if (!TextUtils.isEmpty(type) && type.equalsIgnoreCase("LineString")) {
+
+                    // Get the Coordinates
+                    JSONArray coords = geometry.getJSONArray("coordinates");
+                    for (int lc = 0; lc < coords.length(); lc++) {
+                        JSONArray coord = coords.getJSONArray(lc);
+                        LatLng latLng = new LatLng(coord.getDouble(1), coord.getDouble(0));
+                        points.add(latLng);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.e("OK", "Exception Loading GeoJSON: " + e.toString());
+        }
+
+        return points;
+    }
+
+    @Override
+    protected void onPostExecute(List<LatLng> points) {
+        super.onPostExecute(points);
+
+        if (points.size() > 0) {
+            final LatLng[] pointsArray = points.toArray(new LatLng[points.size()]);
+
+
+
+
+                mapView.getMapAsync(new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(MapboxMap mapboxMap) {
+                        for(int i = 0; i<pointsArray.length; i++)
+                        {
+                            mapboxMap.addMarker(new MarkerOptions()
+                            .position(pointsArray[i]));
+
+
+                    }}
+                });
+
+        }
+    }
+}}

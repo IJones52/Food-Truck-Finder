@@ -11,5 +11,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.ismaelgwen.foodtruckfinder.AllTrucks"
     tools:showIn="@layout/activity_all_trucks">
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/truckList">
+
+    </ListView>
 
 </RelativeLayout>

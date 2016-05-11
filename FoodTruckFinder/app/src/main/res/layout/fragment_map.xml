@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         mapbox:access_token="pk.eyJ1IjoiaWpvbmVzIiwiYSI6ImNpbW00Znp5MTAzczdlOW02N3c2NjYxdXgifQ.LZZvzTQqEXrAxN6bIf9ERw"
+        mapbox:style_url="mapbox://styles/ijones/cimm4ia7j00daypnhfxga4krh"
+
         mapbox:center_latitude="47.620499"
         mapbox:center_longitude="-122.350876"
         mapbox:zoom="12"
