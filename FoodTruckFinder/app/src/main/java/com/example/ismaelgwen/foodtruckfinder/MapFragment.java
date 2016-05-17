@@ -1,16 +1,24 @@
 package com.example.ismaelgwen.foodtruckfinder;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolylineOptions;
@@ -53,6 +61,10 @@ public class MapFragment extends Fragment  {
     private String mParam2;
     MapView mapView;
 
+    LocationManager locationManager;
+    double longitudeBest, latitudeBest;
+    double longitudeGPS, latitudeGPS;
+    double longitudeNetwork, latitudeNetwork;
     private OnFragmentInteractionListener mListener;
 
     public MapFragment() {
@@ -98,10 +110,20 @@ public class MapFragment extends Fragment  {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
-           /*     mapboxMap.addMarker(new MarkerOptions()
+                if (isLocationEnabled()) {
+
+                } else {
+                    showAlert();
+                }
+                Location l = new Location("place");
+                locationListenerNetwork.onLocationChanged(l);
+                mapboxMap.addMarker(new MarkerOptions()
+                .position(new LatLng(latitudeNetwork, longitudeNetwork))
+                        .title("You are here"));
+             mapboxMap.addMarker(new MarkerOptions()
                     .position(new LatLng(47.6908946, -122.3657819))
                     .title("Chuck's Hop Shop"));
-                mapboxMap.addMarker(new MarkerOptions()
+           /*     mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(47.6666891, -122.3711647))
                         .title("Stoup Brewing"));
                 mapboxMap.addMarker(new MarkerOptions()
@@ -141,7 +163,7 @@ public class MapFragment extends Fragment  {
     }
 
 
-//thing
+
     // Activity lifecycle calls
     @Override
     public void onStart() {
@@ -205,6 +227,46 @@ public class MapFragment extends Fragment  {
             is.close();
         }
     }
+    private boolean isLocationEnabled() {
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);}
+
+        private void showAlert() {
+            final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+            dialog.setTitle("Enable Location")
+                    .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " +
+                            "use this app")
+                    .setPositiveButton("Location Settings", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(myIntent);
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                        }
+                    });
+            dialog.show();
+        }
+    private final LocationListener locationListenerNetwork = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            longitudeNetwork = location.getLongitude();
+            latitudeNetwork = location.getLatitude();
+
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+        }
+        @Override
+        public void onProviderEnabled(String s) {
+        }
+        @Override
+        public void onProviderDisabled(String s) {
+        }
+    };
 
 class ReadCoordinatesFromURLTask extends AsyncTask<Void, Void, List<LatLng>> {
     @Override

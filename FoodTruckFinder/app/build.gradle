@@ -27,5 +27,8 @@ dependencies {
     compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.0.0-rc.1@aar') {
         transitive = true
     }
+    compile('com.mopub:mopub-sdk:4.3.0@aar') {
+        transitive = true
+    }
 
 }
