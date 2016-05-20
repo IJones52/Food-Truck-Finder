@@ -110,11 +110,6 @@ public class MapFragment extends Fragment  {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
-                if (isLocationEnabled()) {
-
-                } else {
-                    showAlert();
-                }
                 Location l = new Location("place");
                 locationListenerNetwork.onLocationChanged(l);
                 mapboxMap.addMarker(new MarkerOptions()
