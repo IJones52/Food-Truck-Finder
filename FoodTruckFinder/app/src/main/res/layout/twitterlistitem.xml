@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="wrap_content" android:gravity="left|center" android:layout_width="wrap_content" android:paddingbottom="5px" android:paddingtop="5px" android:paddingleft="5px">
-    <imageview android:id="@+id/avatar" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginright="6dip" android:src="@drawable/icon" />
-    <linearlayout android:orientation="vertical" android:layout_width="0dip" android:layout_weight="1" android:layout_height="fill_parent">
-        <textview android:id="@+id/username" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" />
-        <textview android:id="@+id/message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginleft="10px" android:textcolor="#0099CC" />
-    </linearlayout>
-</linearlayout>
