@@ -13,15 +13,14 @@
     tools:showIn="@layout/app_bar_my_feed"
     tools:context="com.example.ismaelgwen.foodtruckfinder.MyFeed">
 
-    <TextView
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="Need API key to load twitter feed"/>
+
+    <ListView android:id="@+id/tweetlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Insert Twitter Feed Here"/>
-
-
-    <ListView android:id="@id/android:list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="1"
         android:drawSelectorOnTop="false"/>
 </RelativeLayout>
