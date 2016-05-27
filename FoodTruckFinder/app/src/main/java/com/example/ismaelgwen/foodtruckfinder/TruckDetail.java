@@ -17,8 +17,7 @@ public class TruckDetail extends AppCompatActivity {
         setContentView(R.layout.activity_truck_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ImageView imageView = (ImageView) findViewById(R.id.imageView2);
-        imageView.setImageResource(R.drawable.ic_menu_gallery);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

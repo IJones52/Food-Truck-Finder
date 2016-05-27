@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.ismaelgwen.foodtruckfinder.AllTrucks"
-    tools:showIn="@layout/activity_all_trucks">
+    tools:showIn="@layout/activity_all_trucks"
+    android:background="#64a5e5">
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -34,12 +34,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AllTrucks"
-            android:label="@string/title_activity_all_trucks"
+            android:label="All Trucks"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TruckDetail"
-            android:label="@string/title_activity_truck_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="Truck Detail"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

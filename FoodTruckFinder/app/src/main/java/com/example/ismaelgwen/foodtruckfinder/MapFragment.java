@@ -20,12 +20,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolylineOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.twitter.sdk.android.core.internal.TwitterCollection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -112,13 +114,14 @@ public class MapFragment extends Fragment  {
             public void onMapReady(MapboxMap mapboxMap) {
                 Location l = new Location("place");
                 locationListenerNetwork.onLocationChanged(l);
+
                 mapboxMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latitudeNetwork, longitudeNetwork))
+                        .position(new LatLng(latitudeNetwork, longitudeNetwork))
                         .title("You are here"));
-             mapboxMap.addMarker(new MarkerOptions()
+            mapboxMap.addMarker(new MarkerOptions()
                     .position(new LatLng(47.6908946, -122.3657819))
                     .title("Chuck's Hop Shop"));
-           /*     mapboxMap.addMarker(new MarkerOptions()
+             /*/  mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(47.6666891, -122.3711647))
                         .title("Stoup Brewing"));
                 mapboxMap.addMarker(new MarkerOptions()
@@ -262,6 +265,29 @@ public class MapFragment extends Fragment  {
         public void onProviderDisabled(String s) {
         }
     };
+    //for selecting map markers as current positions, needs to be modified
+  /*  public void placeGTMarker() {
+        alMarkerGT = new ArrayList<Marker>();
+        marker = new Marker("my Marker", "", latLng);
+        marker.setMarker(activity.getResources()
+                .getDrawable(R.drawable.map_pin));
+        mv.addMarker(marker);
+        alMarkerGT.add(marker);
+        itemizedIconOverlayGT = new ItemizedIconOverlay(activity, alMarkerGT,
+                new OnItemGestureListener<Marker>() {
+
+                    @Override
+                    public boolean onItemSingleTapUp(int index, Marker item) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onItemLongPress(int index, Marker item) {
+                        return false;
+                    }
+                });
+        mv.addItemizedOverlay(itemizedIconOverlayGT);
+    }*/
 
 class ReadCoordinatesFromURLTask extends AsyncTask<Void, Void, List<LatLng>> {
     @Override
@@ -323,4 +349,5 @@ class ReadCoordinatesFromURLTask extends AsyncTask<Void, Void, List<LatLng>> {
 
         }
     }
-}}
+}
+}
