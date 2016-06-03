@@ -51,6 +51,7 @@ public class MyFeed extends AppCompatActivity
         List<Long> tweetIds = Arrays.asList(503435417459249153L, 510908133917487104L, 473514864153870337L, 477788140900347904L);
         final CollectionTimeline timeline = new CollectionTimeline.Builder()
                 .id(569961150045896704L)
+                .id(503435417459249153L)
                 .build();
         ListView listView = (ListView) findViewById(R.id.tweetlist);
 

@@ -21,8 +21,8 @@ public class AllTrucks extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_trucks);
 
-       int [] prgmImages={R.drawable.ic_menu_camera};
-        String[] prgmNameList={"Placeholder"};
+       int [] prgmImages={R.drawable.ic_menu_camera, R.drawable.download, R.drawable.compass};
+        String[] prgmNameList={"Placeholder", "Example 2", "Example 3"};
 
         context=this;
 
