@@ -43,15 +43,15 @@ public class MyFeed extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_feed);
 
-        TwitterAuthConfig authConfig =  new TwitterAuthConfig("consumerKey", "consumerSecret");
+        TwitterAuthConfig authConfig =  new TwitterAuthConfig("QGlRf5ch4J733DXJAcMsMziWR", "RlgAOZr421WhrlaPXj4HP0xuS3xV0CPxFvQwKV76rwhsYbuRtL");
         Fabric.with(this, new Twitter(authConfig));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         List<Long> tweetIds = Arrays.asList(503435417459249153L, 510908133917487104L, 473514864153870337L, 477788140900347904L);
         final CollectionTimeline timeline = new CollectionTimeline.Builder()
-                .id(569961150045896704L)
-                .id(503435417459249153L)
+                .id(740032836602724353L)
+
                 .build();
         ListView listView = (ListView) findViewById(R.id.tweetlist);
 

@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <meta-data android:name="io.fabric.ApiKey" android:value="YOUR_API_KEY"/>
+
     <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService" />
 
     <application
@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService" />
-
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b7c6d04fd018c515c4d929542a86244b3a437b11" />
         <activity
             android:name=".MyFeed"
             android:label="@string/app_name"
